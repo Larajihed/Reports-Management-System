@@ -1,0 +1,10 @@
+.pdf-logo{
+    width: 25px;
+}
+.element{
+    display: flex;
+    padding: 10px;
+}
+li{
+  list-style: none;  
+}
