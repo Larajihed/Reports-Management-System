@@ -6,7 +6,9 @@ import  { database } from '../firebase'
 import { ref, onValue } from "firebase/database";
 import ReportsList from "./ReportsList"
 // import ReportsList from "./ReportsList"
-
+import Header from './Header'
+import Menu from "./Menu"
+import './style/Dashboard.css'
 export default function Dashboard() {
 const [reports,setReports] =useState('[]')
   const [error, setError] = useState("")
@@ -15,16 +17,7 @@ const [reports,setReports] =useState('[]')
   const [data, setdata] = useState()
   const [report, setReport] = useState('')
 
-  async function handleLogout() {
-    setError("")
 
-    try {
-      await logout()
-      navigate("/login")
-    } catch {
-      setError("Failed to log out")
-    }
-  }
   let tab=[]
 
   useEffect(()=>{
@@ -53,28 +46,26 @@ const [reports,setReports] =useState('[]')
  
   return (
     <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Profile</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <strong>Email:</strong> {currentUser.email}
-          <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
-            Update Profile
-          </Link>
-          <Link to="/report-form" className="btn btn-primary w-100 mt-3">
+        <Header/>
+        <Menu/>
+        <div style={{paddingLeft: "200px"}}>
+        <strong>Current User : </strong> {currentUser.email}
+        <Link to="/report-form" className="btn btn-primary  mt-3" style={{}}>
             Create New Report
           </Link>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleLogout}>
-          Log Out
-        </Button>
-        
-      </div>
-      <div>
+        </div>
+       
+      <div className="card">
+        <div className="card-body">
+          {error && <Alert variant="danger">{error}</Alert>}
+          <div >
       <ReportsList data={reports} />
       </div>
+      
+        </div>
+      </div>
+      
+ 
       
     </>
   )

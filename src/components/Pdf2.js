@@ -2,18 +2,14 @@ import React from 'react'
 
 import ReactToPdf  from 'react-to-pdf'
 import { Button, ButtonGroup } from "react-bootstrap"
-import { useNavigate  } from "react-router-dom"
 import './style/PDF.css'
 import { CsvToHtmlTable } from 'react-csv-to-table';
 
 
-export default function PDF(props ) {
+export default function pdf2(props ) {
+    console.log(props.data.ResearchHours)
     const ref = React.createRef();
-    const navigate = useNavigate();
-    function handleHome(){
-        navigate('/');
-
-    }
+ 
   
   return (
     <div className='scaled'>
@@ -22,10 +18,7 @@ export default function PDF(props ) {
             <ButtonGroup>
                 <Button variant='primary' onClick={toPdf}>Generate pdf  </Button>
                 <Button variant='primary' onClick={toPdf}>Save To the Cloud</Button>
-                <Button variant='primary' onClick={handleHome}>
-                Go Home
                 
-                </Button>
                 
             </ButtonGroup>
             
@@ -37,8 +30,8 @@ export default function PDF(props ) {
         <div className="info-container">
 
             <div className="infos">
-                <p className="title">{props.data[4]}</p>
-         <p className="date">{props.data[5]}</p> 
+                <p className="title">{props.data.ResearchHours}</p>
+         <p className="date">{props.data.ResearchHours}</p> 
 
             </div>
 
@@ -54,12 +47,12 @@ export default function PDF(props ) {
         </div>
         <div className="notes-container">
             <li>
-                In the past month, your company got <span class="bold"> {props.data[1]} business days back*</span> and saved <span className="bold">{props.data[1]*125-props.data[1]} dollars** </span> by using Wonder for
+                In the past month, your company got <span class="bold"> {props.data.ResearchHours} business days back*</span> and saved <span className="bold">{props.data.ResearchHours} dollars** </span> by using Wonder for
                 your research needs.
 
             </li>
             <li>
-                Your company's peak* throughput in a 24 hour period was <span className="bold">  {props.data[3]}  hours ***</span> of research.
+                Your company's peak* throughput in a 24 hour period was <span className="bold">  {props.data.ResearchHours}  hours ***</span> of research.
             </li>
 
         </div>
@@ -70,21 +63,21 @@ export default function PDF(props ) {
             <div className="metrics-element ">
                 <div className="metric-title">
                     <p>REASEARCH HOURS</p>
-                    <p className='metric-value'>{props.data[1]}</p>
+                    <p className='metric-value'>{props.data.ResearchHours}</p>
                 </div>
              
             </div>
             <div className="metrics-element ">
                 <div className="metric-title">
                     <p>NUMBER OF PROJECTS</p>
-                    <p className='metric-value'>{props.data[1]}</p>
+                    <p className='metric-value'>{props.data.ResearchHours}</p>
                 </div>
             
             </div>
             <div className="metrics-element ">
                 <div className="metric-title">
                     <p>NUMBER OF USERS</p>
-                    <p className='metric-value'>{props.data[1]}</p>
+                    <p className='metric-value'>{props.data.ResearchHours}</p>
 
                 </div>
                
@@ -92,7 +85,7 @@ export default function PDF(props ) {
             <div className="metrics-element">
                 <div className="metric-title">
                     <p>TOTAL SPENT</p>
-                    <p className='metric-value'>{props.data[1]}</p>
+                    <p className='metric-value'>{props.data.ResearchHours}</p>
                 </div>
              
             </div>
@@ -109,13 +102,13 @@ export default function PDF(props ) {
             *** Peak Man Hours = The most hours researched in a given day 
         </p>
         <CsvToHtmlTable
-  data={props.data[6]}
+  data={props.data.ResearchHours}
   csvDelimiter=","
 />
 
     </div>
     </div>
-    {props.data[0]} </div>
+    {props.data.ResearchHours} </div>
 </div>
   )
 }

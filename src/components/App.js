@@ -17,9 +17,8 @@ import PDF from "./PDF";
 function App() {
   return (
     <AuthProvider>
-      <Header />
-      <Container
-        className="d-flex align-items-center justify-content-center"
+      <div
+        className=" align-items-center  "
         style={{ minHeight: "100vh" }}
       >
         <div className="w-100" style={{ maxWidth: "400px" }}>
@@ -73,7 +72,7 @@ function App() {
             </AuthProvider>
           </Router>
         </div>
-      </Container>
+      </div>
     </AuthProvider>
   );
 }

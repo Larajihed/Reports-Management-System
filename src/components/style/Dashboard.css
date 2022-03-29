@@ -1,0 +1,12 @@
+.card{
+    margin-left: 200px;
+    margin-top: 16px;
+}
+.w-100{
+    max-width: 1000px;
+}
+.card-body {
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+    width: 450px;
+}

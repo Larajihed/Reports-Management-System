@@ -1,7 +1,9 @@
 .main{
     padding: 32px;
 }
-
+/*.scaled{
+   transform: scale(0.8)
+}*/
 header {
     border-bottom: 0.5px solid #DDE1E6;
     display: flex;
