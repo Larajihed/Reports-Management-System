@@ -4,6 +4,8 @@
 /*.scaled{
    transform: scale(0.8)
 }*/
+
+
 header {
     border-bottom: 0.5px solid #DDE1E6;
     display: flex;
@@ -36,7 +38,7 @@ header {
 }
 
 .row2 div {
-    width: 233px;
+    width: 184px;
     height: 68px;
 }
 
@@ -314,4 +316,5 @@ li{
 .metric-title {
     font-size: 14px;
 }
+
 

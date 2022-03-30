@@ -1,10 +1,5 @@
-.pdf-logo{
-    width: 25px;
-}
-.element{
-    display: flex;
-    padding: 10px;
-}
-li{
-  list-style: none;  
+tr:hover{
+  background-color: rgb(206, 206, 206);
+  cursor: pointer;
+  
 }

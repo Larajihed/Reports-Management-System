@@ -5,6 +5,9 @@ import { Link, useNavigate } from "react-router-dom"
 import  { database } from '../firebase'
 import { ref, onValue } from "firebase/database";
 import ReportsList from "./ReportsList"
+import Popup from './Popup';
+import 'reactjs-popup/dist/index.css';
+
 // import ReportsList from "./ReportsList"
 import Header from './Header'
 import Menu from "./Menu"
@@ -16,6 +19,8 @@ const [reports,setReports] =useState('[]')
   const navigate = useNavigate();
   const [data, setdata] = useState()
   const [report, setReport] = useState('')
+  const [show, setShow] = useState(false);
+
 
 
   let tab=[]
@@ -53,10 +58,13 @@ const [reports,setReports] =useState('[]')
         <Link to="/report-form" className="btn btn-primary  mt-3" style={{}}>
             Create New Report
           </Link>
+      
         </div>
-       
+        <Popup data={reports} >
+
+  </Popup>
       <div className="card">
-        <div className="card-body">
+        <div >
           {error && <Alert variant="danger">{error}</Alert>}
           <div >
       <ReportsList data={reports} />

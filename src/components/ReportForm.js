@@ -6,7 +6,8 @@ import { ref, push, set  } from "firebase/database";
 import PDF from "./PDF";
 import Header from "./Header";
 import Menu from "./Menu";
-
+import Popup from './Popup';
+//import 'reactjs-popup/dist/index.css';
 
 
 
@@ -131,10 +132,10 @@ console.log(arr[6])
         </Card.Body>
         
       </Card>
-      <div style={{position:"absolute", left:"528px",top:"10px", }}>
-            { showPdf ?  <PDF data={arr}/> : null }
+      <Popup data={arr} >
 
-            </div>
+  </Popup>
+     
     </>
   )
 }
