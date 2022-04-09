@@ -1,44 +1,58 @@
-import React from 'react'
-
+import React, {useState} from 'react'
+import { Modal, Button } from 'react-bootstrap';
 import ReactToPdf  from 'react-to-pdf'
-import { Button, ButtonGroup } from "react-bootstrap"
-import { useNavigate  } from "react-router-dom"
-import './style/PDF.css'
 import { CsvToHtmlTable } from 'react-csv-to-table';
+import {  ButtonGroup } from "react-bootstrap"
+import './style/PDF.css'
 
 
-export default function PDF(props ) {
-    const ref = React.createRef();
-    const navigate = useNavigate();
-    function handleHome(){
-        navigate('/');
+export default function Popup(props) {
+  const ref = React.createRef();
 
-    }
+  const values = [true];
+  const [fullscreen, setFullscreen] = useState(true);
+  const [show, setShow] = useState(false);
+
+  const arr = props.data
+
+  //console.log(arr)
+  //const listItems = Object.keys(arr)
+  function handleShow(breakpoint) {
+    setFullscreen(breakpoint);
+    setShow(true);
+
+  }
   
   return (
-    <div className='scaled'>
+    <>
+   
+    {values.map((v, ) => (
+        <Button className="me-2 mb-2" onClick={() => handleShow(v)}>
+          View
+        </Button>
+      ))}
+      <Modal show={show} fullscreen={fullscreen}  onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Pdf Report</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className='scaled'>
     <ReactToPdf targetRef={ref} filename="div-blue.pdf"  x={.5} y={.5}>
         {({toPdf}) => (
             <ButtonGroup>
                 <Button variant='primary' onClick={toPdf}>Generate pdf  </Button>
-                <Button variant='primary' onClick={toPdf}>Save To the Cloud</Button>
-                <Button variant='primary' onClick={handleHome}>
-                Go Home
-                
-                </Button>
                 
             </ButtonGroup>
             
         )}
         
     </ReactToPdf>
-    <div className='main' style={{width: 990, height: 1390  }} ref={ref}>
-     
+    <div  className='main' style={{width: 800, height: 1390  }} ref={ref}>
         <div className="info-container">
 
             <div className="infos">
-                <p className="title">{props.data[4]}</p>
-         <p className="date">{props.data[5]}</p> 
+                <p className="title">{arr[0]}</p>
+         <p className="date">{arr[0]}</p> 
 
             </div>
 
@@ -54,12 +68,12 @@ export default function PDF(props ) {
         </div>
         <div className="notes-container">
             <li>
-                In the past month, your company got <span class="bold"> {props.data[1]} business days back*</span> and saved <span className="bold">{props.data[1]*125-props.data[1]} dollars** </span> by using Wonder for
+                In the past month, your company got <span class="bold"> {arr[0]} business days back*</span> and saved <span className="bold">{arr[0]} dollars** </span> by using Wonder for
                 your research needs.
 
             </li>
             <li>
-                Your company's peak* throughput in a 24 hour period was <span className="bold">  {props.data[3]}  hours ***</span> of research.
+                Your company's peak* throughput in a 24 hour period was <span className="bold">  {arr[0]}  hours ***</span> of research.
             </li>
 
         </div>
@@ -70,21 +84,21 @@ export default function PDF(props ) {
             <div className="metrics-element ">
                 <div className="metric-title">
                     <p>REASEARCH HOURS</p>
-                    <p className='metric-value'>{props.data[1]}</p>
+                    <p className='metric-value'>{arr[0]}</p>
                 </div>
              
             </div>
             <div className="metrics-element ">
                 <div className="metric-title">
                     <p>NUMBER OF PROJECTS</p>
-                    <p className='metric-value'>{props.data[1]}</p>
+                    <p className='metric-value'>{arr[0]}</p>
                 </div>
             
             </div>
             <div className="metrics-element ">
                 <div className="metric-title">
                     <p>NUMBER OF USERS</p>
-                    <p className='metric-value'>{props.data[1]}</p>
+                    <p className='metric-value'>{arr[0]}</p>
 
                 </div>
                
@@ -92,7 +106,7 @@ export default function PDF(props ) {
             <div className="metrics-element">
                 <div className="metric-title">
                     <p>TOTAL SPENT</p>
-                    <p className='metric-value'>{props.data[1]}</p>
+                    <p className='metric-value'>{arr[0]}</p>
                 </div>
              
             </div>
@@ -109,13 +123,17 @@ export default function PDF(props ) {
             *** Peak Man Hours = The most hours researched in a given day 
         </p>
         <CsvToHtmlTable
-  data={props.data[6]}
+  data={arr[0]}
   csvDelimiter=","
 />
 
     </div>
     </div>
-    {props.data[0]} </div>
+    {arr[0]} </div>
 </div>
+        </Modal.Body>
+      </Modal>
+
+  </>
   )
 }

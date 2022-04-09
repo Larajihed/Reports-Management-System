@@ -11,7 +11,7 @@ import UpdateProfile from "./UpdateProfile";
 import ReportForm from "./ReportForm";
 import Header from "./Header";
 import Report from "./Report";
-import PDF from "./PDF";
+
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
     <AuthProvider>
       <div
         className=" align-items-center  "
-        style={{ minHeight: "100vh" }}
+        style={{ minHeight: "100vh",backgroundColor:"#F5F5F5"}}
       >
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <Router>
@@ -41,14 +41,7 @@ function App() {
                     </PrivateRoute>
                   }
                 ></Route>
-                <Route
-                  path="/pdf"
-                  element={
-                    <PrivateRoute>
-                      <PDF/>
-                    </PrivateRoute>
-                  }
-                ></Route>
+                
                 <Route
                   path="/report"
                   element={

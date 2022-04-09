@@ -5,8 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import  { database } from '../firebase'
 import { ref, onValue } from "firebase/database";
 import ReportsList from "./ReportsList"
-import Popup from './Popup';
-import 'reactjs-popup/dist/index.css';
+
 
 // import ReportsList from "./ReportsList"
 import Header from './Header'
@@ -17,64 +16,51 @@ const [reports,setReports] =useState('[]')
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate();
-  const [data, setdata] = useState()
-  const [report, setReport] = useState('')
-  const [show, setShow] = useState(false);
+
 
 
 
   let tab=[]
 
   useEffect(()=>{
+    // get reference for the reports in the database
     const reportsRef= ref(database,'reports/')
     onValue(reportsRef,(snapshot)=>{
       const data=snapshot.val()
-      Object.keys(data).map((key,index)=> {
-        const one = data[key]
-        tab.push(one)
-
-      })
-      setReports(tab)
       
+              /* Map into array */
+
+      Object.keys(data).map((key)=> {
+
+        //const one = data[key]
+        //tab.push(one)
+        
+     
+
+
+
+     }) 
+              
+
+      setReports(data)
+      /* Map into array */
     })  
   }, [])
-//console.log(reports)
-//for (var key in data) {
-//  if (data.hasOwnProperty(key)) {
- // const one = data[key] ;
- // setReport(one)
-
-  //console.log("onnnnnne" + one)
-  //}
-//}
 
  
   return (
     <>
         <Header/>
-        <Menu/>
-        <div style={{paddingLeft: "200px"}}>
+        <Menu ></Menu>
+        <div style={{paddingLeft: "250px",paddingTop:"95px"}}>
         <strong>Current User : </strong> {currentUser.email}
-        <Link to="/report-form" className="btn btn-primary  mt-3" style={{}}>
+        <Link to="/report-form" className="btn btn-primary  mt-3" >
             Create New Report
           </Link>
       
         </div>
-        <Popup data={reports} >
-
-  </Popup>
-      <div className="card">
-        <div >
-          {error && <Alert variant="danger">{error}</Alert>}
-          <div >
-      <ReportsList data={reports} />
-      </div>
-      
-        </div>
-      </div>
-      
- 
-      
+        <ReportsList data={reports} />
+     
     </>
   )
 }

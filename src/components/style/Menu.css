@@ -1,0 +1,35 @@
+.menu-element{
+    color:white;
+    border:1px solid ;
+    padding:8px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    margin:32px 16px;
+    width: 200px;
+}
+.menu-element:hover{
+    color:#094494;
+    background-color: white;
+    border:1px solid ;
+    padding:8px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    margin:32px 16px;
+    width: 200px;
+}
+
+
+
+
+.logout-btn{
+    background-color:red;
+    color: white;
+    border:none ;
+    padding:8px 16px;
+
+
+    border-radius: 6px;
+    margin:32px 16px;
+    width: 200px;
+    margin-top: 470px;
+}

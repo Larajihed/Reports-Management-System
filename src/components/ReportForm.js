@@ -3,11 +3,12 @@ import { Form, Button, Card,  } from "react-bootstrap"
 import { database } from "../firebase";
 // import { useNavigate } from "react-router-dom"
 import { ref, push, set  } from "firebase/database";
-import PDF from "./PDF";
 import Header from "./Header";
 import Menu from "./Menu";
-import Popup from './Popup';
+import Popup from './NewReportPopup';
 //import 'reactjs-popup/dist/index.css';
+import auth from '../firebase'
+import { getAuth } from "firebase/auth";
 
 
 
@@ -20,17 +21,15 @@ const peakHoursRef =useRef()
 const companyNameRef =useRef()
 const dateRef =useRef()
 const dataRef =useRef()
-  //const [loading, setLoading] = useState(false)
-//   const navigate = useNavigate();
+
   const postListRef = ref(database, 'reports');
   const newPostRef = push(postListRef);
-  const [showPdf, setPdf] = useState(false)
-  const [arr, setdata] = useState('[]')
+  const [arr, setdata] = useState('')
+
 
   
-
-  
-
+  const auth = getAuth();
+  const user = auth.currentUser;
 
 
 
@@ -44,47 +43,46 @@ const dataRef =useRef()
     const companyName = companyNameRef.current.value
     const date = dateRef.current.value
     const csvData= dataRef.current.value
-    let variabless = [projectsNumber,ResearchHours,usersNumber,peakHours,companyName,date,csvData ]
-    
-    console.log(variabless)
-
-
-    await set(newPostRef, {
+    const variabless = [projectsNumber,ResearchHours,usersNumber, peakHours,companyName,date,csvData]
+console.log("variables"  + variabless)
+const userId = user.uid
+    await set(newPostRef, 
       
-        projectsNumber,
-        ResearchHours,
-        usersNumber,
-        peakHours,
-        companyName,
-        date,
-        csvData,
+      {
+   
+          
+            userId,
+            projectsNumber,
+            ResearchHours,
+            usersNumber,
+            peakHours,
+            companyName,
+            date,
+            csvData,
+         
+          
+       
+        
+        
     },
     );
     
-    
-  //const elementsArray = [ ...e.target.elements];
- // const formData=elementsArray.reduce((accumulator, currentValue)=> {
-   // if (currentValue.id){
-   //   accumulator[currentValue.id] = currentValue.value;
-  //  }
-  //  return accumulator
- // },{})
-//history.push('/PDF',[]);
+
 
   console.log("Data sent ! :rocket ");
-  setPdf(true)
+
 setdata(variabless)
 }
  
   
-console.log(arr[6])
+
 
   
   return (
     <>
     <Header></Header>
-    <Menu></Menu>
-      <Card style={{width:"400px" ,display:"flex"}}>
+   <Menu></Menu>
+      <Card style={{width:"400px" ,display:"flex", marginLeft:"250px"}}>
         <Card.Body >
           <h2 className='text-center mb-4'>Report Details</h2>
           <Form onSubmit={handleSubmit}>
@@ -118,23 +116,14 @@ console.log(arr[6])
 
               <textarea ref={dataRef} required style={{marginTop: "32px" , width:"370px", marginLeft:"-84px"}} ></textarea>
             </Form.Group>
-         
+           <button onClick={handleSubmit}> <Popup data={arr}  >
 
-            
-            
-            
-            <Button  className=" mt-4" type="submit" style={{width:"370px"}} >
-                Generate Report
-            </Button>
-         
-
+</Popup> </button> 
           </Form>
         </Card.Body>
         
       </Card>
-      <Popup data={arr} >
-
-  </Popup>
+      
      
     </>
   )
