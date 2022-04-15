@@ -11,15 +11,15 @@ import UpdateProfile from "./UpdateProfile";
 import ReportForm from "./ReportForm";
 import Header from "./Header";
 import Report from "./Report";
-
-
+import Calendar from "./Calendar";
+import Reminders from "./Reminders";
 
 function App() {
   return (
     <AuthProvider>
       <div
         className=" align-items-center  "
-        style={{ minHeight: "100vh",backgroundColor:"#F5F5F5"}}
+        style={{ minHeight: "100vh",}}
       >
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <Router>
@@ -41,6 +41,15 @@ function App() {
                     </PrivateRoute>
                   }
                 ></Route>
+                 <Route
+                  path="/reminders"
+                  element={
+                    <PrivateRoute>
+                      <Reminders/>
+                    </PrivateRoute>
+                  }
+                ></Route>
+                
                 
                 <Route
                   path="/report"

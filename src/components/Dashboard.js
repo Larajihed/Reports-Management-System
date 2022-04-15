@@ -5,12 +5,12 @@ import { Link, useNavigate } from "react-router-dom"
 import  { database } from '../firebase'
 import { ref, onValue } from "firebase/database";
 import ReportsList from "./ReportsList"
-
-
+import welcome from '../assets/svg/welcome.svg'
 // import ReportsList from "./ReportsList"
 import Header from './Header'
 import Menu from "./Menu"
 import './style/Dashboard.css'
+
 export default function Dashboard() {
 const [reports,setReports] =useState('[]')
   const [error, setError] = useState("")
@@ -52,15 +52,22 @@ const [reports,setReports] =useState('[]')
     <>
         <Header/>
         <Menu ></Menu>
-        <div style={{paddingLeft: "250px",paddingTop:"95px"}}>
-        <strong>Current User : </strong> {currentUser.email}
-        <Link to="/report-form" className="btn btn-primary  mt-3" >
+        
+        <div className="welcomeimgcontainer">
+            <img className="welcomeimg" src={welcome}></img>
+          </div>
+
+        <div className="maincontainer" >
+          
+      <div >
+      <strong>Current User : </strong> {currentUser.email}
+        <Link  to="/report-form" className="btn btn-primary " style={{marginLeft:"175px"}} >
             Create New Report
           </Link>
-      
+      </div>
+         <div> <ReportsList data={reports} /></div>
         </div>
-        <ReportsList data={reports} />
-     
+       
     </>
   )
 }

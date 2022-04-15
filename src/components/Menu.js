@@ -21,10 +21,15 @@ export default function Menu() {
         }
       }
   return (
-    <Dropdown.Menu show style={{ diplay:"flex", paddingRight:"10px", paddingBottom:"450px",paddingTop:"16px", border:"none", backgroundColor:"#094494", position:"fixed", zIndex:"0",marginTop:"69px"}}>
+    <Dropdown.Menu show style={{ diplay:"flex", paddingRight:"10px", paddingBottom:"450px",paddingTop:"16px", border:"none", background: "#FFFFFF",boxShadow: "2px 7px 35px rgba(221, 225, 229, 0.6)", position:"fixed", zIndex:"0",marginTop:"69px"}}>
+   
+  <div style={{display: "grid"}}>
   
-  <div>
-  <Link className='menu-element' to="/">Dashboard</Link>
+  <Link className='menu-element' to="/"  >Dashboard</Link>
+  
+
+  <Link className='menu-element' to="/update-profile"  >Account Settings</Link>
+  <Link className='menu-element' to="/reminders"  >Manage Reminders</Link>
   </div>
   <div>
     

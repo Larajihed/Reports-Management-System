@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 import Header from "./Header";
+import Menu from "./Menu";
 export default function UpdateProfile() {
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -44,7 +45,8 @@ export default function UpdateProfile() {
   return (
     <>
     <Header></Header>
-      <Card>
+    <Menu/>
+      <div className="card" style={{position: "absolute", marginLeft:"450px",width:"500px",top:"20%"}}>
         <Card.Body>
           <h2 className="text-center mb-4">Update Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
@@ -79,7 +81,7 @@ export default function UpdateProfile() {
             </Button>
           </Form>
         </Card.Body>
-      </Card>
+      </div>
       <div className="w-100 text-center mt-2">
         <Link to="/">Cancel</Link>
       </div>

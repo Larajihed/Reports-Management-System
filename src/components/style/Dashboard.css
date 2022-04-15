@@ -2,3 +2,29 @@
     
     margin-top: 16px;
 }
+.welcomeimg{
+    height: 212.809814453125px;
+width: 600px;
+
+
+
+}
+.welcomeimgcontainer{
+    position: absolute;
+    left: 30%;
+    top: 10%;
+}
+.maincontainer{
+    position: absolute;
+    left: 30%;
+    top: 45%;
+    display: inline;
+}
+.tablelink{
+    position: absolute;
+    top: 20%;
+}
+.reportsList{
+    position: absolute;
+    top: 70%;
+}

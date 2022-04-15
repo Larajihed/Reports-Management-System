@@ -82,7 +82,7 @@ setdata(variabless)
     <>
     <Header></Header>
    <Menu></Menu>
-      <Card style={{width:"400px" ,display:"flex", marginLeft:"250px"}}>
+      <Card style={{width:"400px" ,display:"flex", marginLeft:"250px",position:"absolute", top:"10%"}}>
         <Card.Body >
           <h2 className='text-center mb-4'>Report Details</h2>
           <Form onSubmit={handleSubmit}>

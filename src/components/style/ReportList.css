@@ -5,13 +5,21 @@ tr:hover{
 }
 
 .position{
-  margin-left: 250px;
+  
   margin-top: 25px;
   
 }
-
+.font-24{
+  font-size: 15px;
+  text-align: center;
+}
+th{
+  line-height: 50px;
+  font-size: 24px;
+ background-color:  #ECF7FD;
+ 
+}
 th:nth-child(3){
-  background-color:red;
   width: 20%;
 }
 

@@ -5,7 +5,6 @@ import 'reactjs-popup/dist/index.css';
 import { Button } from 'react-bootstrap';
 import { database } from '../firebase';
 import { ref,  remove } from "firebase/database";
-import auth from '../firebase'
 import { getAuth } from "firebase/auth";
 
 
@@ -43,23 +42,23 @@ export default function ReportsList(props) {
 
       <table className='position ' width="500" style={{ fontSize: "16px", border: "none", borderRadius: "60px" }}>
 
-        <thead style={{ fontSize: "16px" }}>
-          <th style={{ fontSize: "16px" }} width="1%">#</th>
-          <th width="40%">company Name</th>
-          <th width="30%" >Date</th>
-          <th width="20%">Report</th>
+        <thead  >
+          <th className='font-24'  width="1%">#</th>
+          <th className='font-24' width="40%">Company</th>
+          <th className='font-24' width="30%" >Date</th>
+          <th className='font-24' width="20%">Report</th>
         </thead>
         <tbody>
       
 
           {listItems.map((report, index) =>
 
-            <tr className='elementl'>
+            <tr>
               {(() => {
         if (arr[report].userId ==  localUserId) {
           return (
             <> 
-            <td >{index + 1} </td>
+            <td >{index } </td>
             <td >
                 {
 
