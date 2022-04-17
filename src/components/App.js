@@ -10,7 +10,6 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import ReportForm from "./ReportForm";
 import Header from "./Header";
-import Report from "./Report";
 import Calendar from "./Calendar";
 import Reminders from "./Reminders";
 
@@ -50,15 +49,7 @@ function App() {
                   }
                 ></Route>
                 
-                
-                <Route
-                  path="/report"
-                  element={
-                    <PrivateRoute>
-                      <Report />
-                    </PrivateRoute>
-                  }
-                ></Route>
+       
                 <Route
                   path="/report-form"
                   element={

@@ -1,4 +1,6 @@
-tr:hover{
+
+/*
+ tr:hover{
   background-color: rgb(206, 206, 206);
   cursor: pointer;
   
@@ -13,6 +15,7 @@ tr:hover{
   font-size: 15px;
   text-align: center;
 }
+
 th{
   line-height: 50px;
   font-size: 24px;
@@ -22,4 +25,6 @@ th{
 th:nth-child(3){
   width: 20%;
 }
+
+*/
 

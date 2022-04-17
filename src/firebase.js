@@ -3,7 +3,7 @@ import 'firebase/compat/auth';
 import { getDatabase } from "firebase/database";
 import 'firebase/compat/firestore';
 import { getStorage } from "firebase/storage";
-
+import {getFirestore} from 'firebase/firestore'
 
 
 
@@ -21,7 +21,7 @@ export const auth = app.auth()
 // Get a reference to the database service
 export const database = getDatabase();
 export const storage = getStorage();
-
+export const db = getFirestore()
 
 export default app
 

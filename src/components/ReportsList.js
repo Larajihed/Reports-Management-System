@@ -37,9 +37,12 @@ export default function ReportsList(props) {
 
 
   }
+  const handleChange = () =>{
+    console.log(arr)
+  }
   return (
     <>
-
+  <input type="text" placeholder='Type a company Name' onChange={handleChange}></input>
       <table className='position ' width="500" style={{ fontSize: "16px", border: "none", borderRadius: "60px" }}>
 
         <thead  >
