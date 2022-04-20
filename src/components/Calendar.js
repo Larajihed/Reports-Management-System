@@ -24,44 +24,61 @@ export default function Calendar() {
       Object.keys(dates).map((date)=> {
       tab.push(dates[date])
      }) 
-     if (isMounted) setdata(tab)
-      // setdata(data)
-      /* Map into array */
+     if (isMounted) 
+     setdata(tab)
+    
     })  
+    
     return ()=>{}
-  },[])
-  
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
+    
+  },[data])
+
+
   const DateListRef = ref(database, 'date');
   const newDateRef = push(DateListRef);
+/*
+  var today = new Date(),
+  date = today.getFullYear() + '' + (today.getMonth() + 1) + '' + today.getDate();
+*/
 
-  
   async function handleDateClick  (e){
+
+    const reportDate = e.dateStr
+/*
+    const year = reportDate.substr(0,4)
+    const day = reportDate.substr(8,9)
+    const month = reportDate.substr(5,2)
+    
+    console.log(year + month + day)
+    console.log(date.toISOString())
+    */
+    /*
       const title = prompt('Enter Title', "")
         await set(newDateRef,       
         {      
-            title:title ? title : e.dateStr,
+            title:title ,
             start: e.dateStr,
             allDay:true,
             status:false          
         },
         );
+        */
     }
  
 
+    const sendEmailReminder = ()=>{
+      console.log("sent")
+    }
 
-const handleEventClick =(e )=>{
-  setShow(true)
-  console.log(e.start)
+    const isSendNear = ()=>{
+
+    }
+ const handleEventClick =(event )=>{
+ // setShow(true)
+  console.log(event)
+  event.remove(event)
+
+
 }
 const handleClose = () =>{
   setShow(false)
