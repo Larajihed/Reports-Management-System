@@ -37,7 +37,7 @@ export default function Popup(props) {
         </Modal.Header>
         <Modal.Body>
           <div className='scaled'>
-    <ReactToPdf targetRef={ref} filename="div-blue.pdf"  x={.5} y={.5}>
+    <ReactToPdf targetRef={ref} filename="Report" x={.5} y={.5}>
         {({toPdf}) => (
             <ButtonGroup>
                 <Button variant='primary' onClick={toPdf}>Generate pdf  </Button>
@@ -51,8 +51,8 @@ export default function Popup(props) {
         <div className="info-container">
 
             <div className="infos">
-                <p className="title">{arr[0]}</p>
-         <p className="date">{arr[0]}</p> 
+                <p className="title">{arr[4]}</p>
+         <p className="date">{arr[5]}</p> 
 
             </div>
 
@@ -68,12 +68,12 @@ export default function Popup(props) {
         </div>
         <div className="notes-container">
             <li>
-                In the past month, your company got <span class="bold"> {arr[0]} business days back*</span> and saved <span className="bold">{arr[0]} dollars** </span> by using Wonder for
+                In the past month, your company got <span class="bold"> {arr[4]} business days back*</span> and saved <span className="bold">{arr[0]} dollars** </span> by using Wonder for
                 your research needs.
 
             </li>
             <li>
-                Your company's peak* throughput in a 24 hour period was <span className="bold">  {arr[0]}  hours ***</span> of research.
+                Your company's peak* throughput in a 24 hour period was <span className="bold">  {arr[3]}  hours ***</span> of research.
             </li>
 
         </div>
@@ -84,7 +84,7 @@ export default function Popup(props) {
             <div className="metrics-element ">
                 <div className="metric-title">
                     <p>REASEARCH HOURS</p>
-                    <p className='metric-value'>{arr[0]}</p>
+                    <p className='metric-value'>{arr[1]}</p>
                 </div>
              
             </div>
@@ -98,7 +98,7 @@ export default function Popup(props) {
             <div className="metrics-element ">
                 <div className="metric-title">
                     <p>NUMBER OF USERS</p>
-                    <p className='metric-value'>{arr[0]}</p>
+                    <p className='metric-value'>{arr[2]}</p>
 
                 </div>
                
@@ -106,7 +106,7 @@ export default function Popup(props) {
             <div className="metrics-element">
                 <div className="metric-title">
                     <p>TOTAL SPENT</p>
-                    <p className='metric-value'>{arr[0]}</p>
+                    <p className='metric-value'>${arr[2]*125}</p>
                 </div>
              
             </div>
@@ -123,13 +123,13 @@ export default function Popup(props) {
             *** Peak Man Hours = The most hours researched in a given day 
         </p>
         <CsvToHtmlTable
-  data={arr[0]}
+  data={arr[6]}
   csvDelimiter=","
 />
 
     </div>
     </div>
-    {arr[0]} </div>
+  </div>
 </div>
         </Modal.Body>
       </Modal>
