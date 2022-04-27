@@ -46,6 +46,8 @@ export default function UpdateProfile() {
     <>
     <Header></Header>
     <Menu/>
+    <h5 style={{position:"absolute",left:"19%",top:"16%",zIndex:"1",backgroundColor:"#ededed",padding:"8px 16px",borderRadius:"5px"}}>Account Settings</h5>
+
       <div className="card" style={{position: "absolute", marginLeft:"450px",width:"500px",top:"20%"}}>
         <Card.Body>
           <h2 className="text-center mb-4">Update Profile</h2>
@@ -79,11 +81,12 @@ export default function UpdateProfile() {
             <Button disabled={loading} className="w-100" type="submit">
               Update
             </Button>
+            <Link to="/">Cancel</Link>
           </Form>
         </Card.Body>
       </div>
       <div className="w-100 text-center mt-2">
-        <Link to="/">Cancel</Link>
+      
       </div>
     </>
   )

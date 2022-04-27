@@ -12,13 +12,13 @@ import ReportForm from "./ReportForm";
 import Header from "./Header";
 import Calendar from "./Calendar";
 import Reminders from "./Reminders";
-
+import SendEmail from "./SendEmail";
+import Clients from "./Clients";
+import ClientsList from "./ClientsList";
 function App() {
   return (
     <AuthProvider>
       <div
-        className=" align-items-center  "
-        style={{ minHeight: "100vh",}}
       >
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <Router>
@@ -29,6 +29,30 @@ function App() {
                   element={
                     <PrivateRoute>
                       <Dashboard />
+                    </PrivateRoute>
+                  }
+                ></Route>
+                <Route
+                  path="/send-email"
+                  element={
+                    <PrivateRoute>
+                     <SendEmail/>
+                    </PrivateRoute>
+                  }
+                ></Route>
+                <Route
+                  path="/clients-list"
+                  element={
+                    <PrivateRoute>
+                     <ClientsList/>
+                    </PrivateRoute>
+                  }
+                ></Route>
+                <Route
+                  path="/clients"
+                  element={
+                    <PrivateRoute>
+                     <Clients/>
                     </PrivateRoute>
                   }
                 ></Route>

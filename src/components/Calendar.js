@@ -1,119 +1,102 @@
-import React,{ useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'
-import { push, ref,set, onValue } from 'firebase/database'
-import {  database } from '../firebase'
+import { push, ref, set, onValue,remove } from 'firebase/database'
+import { database } from '../firebase'
 import './style/Calendar.css'
 export default function Calendar() {
 
-  const [data,setdata]=useState('[]')
-  const [show,setShow] = useState(false)
+  const [data, setdata] = useState('[]')
+  const [show, setShow] = useState(false)
 
-  let tab=[]
+  let tab = []
+  let tab2 = []
 
-  
-  
 
-  useEffect(()=>{
-    const DateRef= ref(database,'date/')
-    let isMounted = true
-    onValue(DateRef,(snapshot)=>{
-      const dates=snapshot.val()
-                 /* Map into array */
-      Object.keys(dates).map((date)=> {
-      tab.push(dates[date])
-     }) 
-     if (isMounted) 
-     setdata(tab)
-    
-    })  
-    
-    return ()=>{}
-    
-  },[data])
+  const DateRef = ref(database, 'date/')
+  useEffect(() => {
+    onValue(DateRef, (snapshot) => {
+      const dates = snapshot.val()
+      /* Map into array */
+      const  amine = Object.keys(dates)
+     amine.map((i,index) => {
+       // console.log( amine[index] )
+
+        tab.push(dates[i])
+        dates[i].key = amine[index];
+        console.log(dates[i])
+      //  console.log(dates[i])
+      })
+     
+              setdata(tab)
+      
+    })
+    return () => { }
+
+  }, [])
 
 
   const DateListRef = ref(database, 'date');
   const newDateRef = push(DateListRef);
-/*
-  var today = new Date(),
-  date = today.getFullYear() + '' + (today.getMonth() + 1) + '' + today.getDate();
-*/
+  /*
+    var today = new Date(),
+    date = today.getFullYear() + '' + (today.getMonth() + 1) + '' + today.getDate();
+  */
 
-  async function handleDateClick  (e){
-
+  async function handleDateClick(e) {
     const reportDate = e.dateStr
-/*
-    const year = reportDate.substr(0,4)
-    const day = reportDate.substr(8,9)
-    const month = reportDate.substr(5,2)
-    
-    console.log(year + month + day)
-    console.log(date.toISOString())
-    */
-    /*
-      const title = prompt('Enter Title', "")
-        await set(newDateRef,       
-        {      
-            title:title ,
-            start: e.dateStr,
-            allDay:true,
-            status:false          
+    var title = prompt('Enter Company Title', "")
+    if (title != "") {
+      await set(newDateRef,
+        {
+          title: title,
+          start: e.dateStr,
+          allDay: true,
+          status: false,
+        
         },
-        );
-        */
-    }
- 
-
-    const sendEmailReminder = ()=>{
-      console.log("sent")
-    }
-
-    const isSendNear = ()=>{
+      );
+          window.location.reload(false);
 
     }
- const handleEventClick =(event )=>{
- // setShow(true)
-  console.log(event)
-  event.remove(event)
+    else if (title === "") {
+      alert('Entry Required');
+      return false;
+    }
+    else {
+      alert('Entry Cancelled By User');
+      return false;
+    }
+  }
 
 
-}
-const handleClose = () =>{
-  setShow(false)
-}
+
+
+
+
+  const handleEventClick = (eventClickInfo ) => {
+    // setShow(true)
+    const Key = eventClickInfo.event._def.extendedProps.key 
+    console.log(Key)
+    remove(ref(database, "date/" + Key))
+    window.location.reload(false);
+  }
   return (
- 
-  <>
 
-  <FullCalendar
-    plugins={[ dayGridPlugin, interactionPlugin]}
-    events={data}
-    eventClick={handleEventClick}
-    dateClick={handleDateClick}
-  />
+    <>
 
-  {show ? 
-  <div className='modal-container' >
-  <h1> Report Details </h1> <button onClick={handleClose}>Close</button>
-  <h3>Date : 22-04-2022</h3>
-  <h3>Status: </h3>
-  <select >
-    <option value="sent">Sent</option>
-    <option value="notSent">Not Sent </option>
-  </select>
-  <button >Delete</button> 
-  <button >Done</button> 
+      <FullCalendar
+        plugins={[dayGridPlugin, interactionPlugin]}
+        events={data}
+        eventClick={handleEventClick}
+        dateClick={handleDateClick}
+      />
 
-  
-  </div>
-  : 
-    <h1></h1>
-}
+      
 
 
 
-  </>
+    </>
   )
 }

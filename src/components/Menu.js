@@ -21,21 +21,23 @@ export default function Menu() {
         }
       }
   return (
-    <Dropdown.Menu show style={{ diplay:"flex", paddingRight:"10px", paddingBottom:"450px",paddingTop:"16px", border:"none", background: "#FFFFFF",boxShadow: "2px 7px 35px rgba(221, 225, 229, 0.6)", position:"fixed", zIndex:"0",marginTop:"69px"}}>
+    <Dropdown.Menu show style={{position:"fixed",  paddingRight:"10px",paddingTop:"16px", border:"none", background: "#FFFFFF",boxShadow: "2px 7px 35px rgba(221, 225, 229, 0.6)", zIndex:"0",marginTop:"69px"}}>
    
   <div style={{display: "grid"}}>
   
   <Link className='menu-element' to="/"  >Dashboard</Link>
   
 
-  <Link className='menu-element' to="/update-profile"  >Account Settings</Link>
   <Link className='menu-element' to="/reminders"  >Manage Reminders</Link>
-  <Link className='menu-element' to="/reminders"  >Manage Clients</Link>
+  <Link className='menu-element' to="/send-email"  >Send Report</Link>
+  <Link className='menu-element' to="/clients"  >Manage Clients</Link>
+  <Link className='menu-element' to="/update-profile"  >Account Settings</Link>
+
   </div>
   <div>
     
   <button className='logout-btn ' onClick={handleLogout}>
-  <i class="bi bi-speedometer2"></i>
+  
   Log Out
         </button>
   </div>

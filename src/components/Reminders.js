@@ -22,24 +22,15 @@ export default function Reminders() {
 };
 
 
-function sendEmail(){
-
-  emailjs.send('service_pchrrda', 'template_b3kb6gi',templateParams ,'pussdbd5XcIzZwUkL')
-  .then(function(response) {
-    console.log('SUCCESS!', response.status, response.text);
- }, function(error) {
-    console.log('FAILED...', error);
- });
-
-}
 
 
   return (
     <>
-    <button onClick={sendEmail}>Send Email</button>
     <Header/>
     <Menu/>
-   <div style={{position:"absolute", top:"20%",left:"30%",width:"650px"}}>
+    <h5 style={{position:"absolute",left:"19%",top:"16%",zIndex:"1",backgroundColor:"#ededed",padding:"8px 16px",borderRadius:"5px"}}>Manage Reminders</h5>
+
+   <div style={{position:"absolute", top:"25%",left:"30%",width:"650px"}}>
    <Calendar/>
 
    </div>

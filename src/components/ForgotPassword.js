@@ -34,8 +34,8 @@ export default function ForgotPassword() {
     <>
   <div style={{display:"flex"}}>
   <div>
-  <h1 >Create Reports in Seconds ! </h1>
-<h2>Login to access your account </h2>
+  <h1 >Reset your Password ! </h1>
+<h2>Reset your account's password </h2>
    <Card style={{width:" 400px", marginLeft:"150px", marginTop: "50px", marginRight:"150px", padding:"25px"}}>
         <Card.Body>
           <h2 className="text-center mb-4">Forgot Password</h2>
@@ -63,7 +63,7 @@ export default function ForgotPassword() {
      
    </div>
       <div className="right">
-  <img style={{  height:" 649px",width:" 666px"}}  src="https://images.unsplash.com/photo-1471970394675-613138e45da3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"></img>
+  <img style={{  height:" 649px",width:" 666px"}}  src="https://images.unsplash.com/photo-1529539795054-3c162aab037a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"></img>
 </div>
   </div>
     

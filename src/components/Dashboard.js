@@ -21,10 +21,11 @@ const [reports,setReports] =useState('[]')
 
 
   let tab=[]
-
+  const reportsRef= ref(database,'reports/')
   useEffect(()=>{
+    
     // get reference for the reports in the database
-    const reportsRef= ref(database,'reports/')
+  
     onValue(reportsRef,(snapshot)=>{
       const data=snapshot.val()
       
@@ -52,13 +53,15 @@ const [reports,setReports] =useState('[]')
     <>
         <Header/>
         <Menu ></Menu>
-        
+          <h5 style={{position:"absolute",left:"19%",top:"16%",zIndex:"1",backgroundColor:"#ededed",padding:"8px 16px",borderRadius:"5px",position:"fixed"}}>Dashboard</h5>
         <div className="welcomeimgcontainer">
+        
             <img className="welcomeimg" src={welcome}></img>
           </div>
 
         <div className="maincontainer" >
-          
+    
+
       <div >
       <strong>Current User : </strong> {currentUser.email}
         <Link  to="/report-form" className="btn btn-primary " style={{marginLeft:"175px"}} >
