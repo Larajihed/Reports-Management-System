@@ -43,6 +43,8 @@ export default function ReportForm() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+var today = new Date();
+var addDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
     const projectsNumber = projectsNumberRef.current.value
     const ResearchHours = ResearchHoursRef.current.value
@@ -67,6 +69,7 @@ export default function ReportForm() {
         companyName,
         date,
         csvData,
+        addDate
 
       },
     );
@@ -84,6 +87,7 @@ setShowPopup(!showPopup)
 
   }
 
+  var today = new Date();
 
 
   return (
@@ -136,10 +140,19 @@ setShowPopup(!showPopup)
      
      
       </Card>
-     <div style={{position:"absolute",left:"20%",top:"20%",zIndex:"1"}}>
+     <div >
      {showPopup ? 
           <PopupTest 
-            dataRef = {projectsNumberRef.current.value}
+            projectsNumber = {projectsNumberRef.current.value}
+            ResearchHours = {ResearchHoursRef.current.value}
+            usersNumber = {usersNumberRef.current.value}
+            peakHours = {peakHoursRef.current.value}
+            companyName = {companyNameRef.current.value}
+            date ={ dateRef.current.value}
+            csvData = {dataRef.current.value}
+            addDate ={
+
+              today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()}
             text='Close Me'
             closePopup={togglePopup}
           />

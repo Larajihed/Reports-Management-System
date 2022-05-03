@@ -1,0 +1,29 @@
+.text{
+    width: 350px;
+    height: 40px;
+    border: 1px rgb(209, 209, 209) solid;
+    border-radius: 6px;
+}
+.filebtn{
+    margin-top: 30px;
+    
+}
+
+.sendbtn{
+    height: 40px;
+    background-color: green;
+    border: none;
+    border-radius: 6px;
+    width: 96px;
+    color: white;
+    font-weight: bold;
+    margin-top: 30px;
+    float: right;
+}
+
+select{
+    height: 48px;
+    width: 350px;
+    border: 1px rgb(209, 209, 209) solid;
+    border-radius: 6px;
+}

@@ -39,10 +39,10 @@ export default function Popup(props) {
           <div className='scaled'>
     <ReactToPdf targetRef={ref} filename="Report" x={.5} y={.5}>
         {({toPdf}) => (
-            <ButtonGroup>
-                <Button variant='primary' onClick={toPdf}>Generate pdf  </Button>
+         
+                <button variant='primary' onClick={toPdf}>Generate pdf  </button>
                 
-            </ButtonGroup>
+       
             
         )}
         

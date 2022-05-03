@@ -6,6 +6,7 @@ import {  ButtonGroup } from "react-bootstrap"
 import './style/PDF.css'
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import { TiTickOutline } from "react-icons/ti";
+import vector from '../assets/svg/Vector.png'
 export default function Popup(props) {
   const ref = React.createRef();
 
@@ -35,31 +36,21 @@ export default function Popup(props) {
         </Modal.Header>
         <Modal.Body>
           <div className='scaled'>
-    <ReactToPdf targetRef={ref} filename="div-blue.pdf"  x={.5} y={.5} >
-        {({toPdf}) => (
-            <div style={{position:"absolute", left:"920px", textAlign:"center"}} >
-                <div style={{width:"350px", height:"250px", backgroundColor:"#dcfcd2",marginBottom:"40px",borderRadius:"16px",textAlign:"center"}}>
-                    <img src="" style={{color:"green"}} />
-                    <TiTickOutline/>
-                    <h4 style={{color:"green"}}> Report Saved Succusfly</h4>
-                </div>
-                <ButtonGroup >
-
-                <Button variant='primary' onClick={toPdf}> <AiOutlineCloudDownload size={30}/>Download as Pdf  </Button>
-                
-                
-            </ButtonGroup>
-            </div>
-            
-        )}
-        
-    </ReactToPdf>
+          <div className='right-section'>
+            <img style={{marginTop:"20px"}} src={vector}></img>
+            <h4 style={{marginTop:"16px"}}>Report Generated on <br></br> {props.addDate}</h4>
+          <ReactToPdf targetRef={ref} filename="Report" x={.5} y={.5}>
+            {({ toPdf }) => (
+              <button style={{marginTop:"8px",border:"none",padding:"8px 16px",borderRadius:"6px",backgroundColor:"#3A9F5D",color:"white"}} variant='primary' onClick={toPdf}>Generate pdf  </button>
+            )}
+          </ReactToPdf>
+      </div>
     <div  className='main' style={{width: 800, height: 1390  }} ref={ref}>
         <div className="info-container">
 
             <div className="infos">
-                <p className="title">{arr.ResearchHours}</p>
-         <p className="date">{arr.ResearchHours}</p> 
+                <p className="title">{arr.companyName}</p>
+         <p className="date">{arr.date}</p> 
 
             </div>
 
@@ -75,7 +66,7 @@ export default function Popup(props) {
         </div>
         <div className="notes-container">
             <li>
-                In the past month, your company got <span class="bold"> {arr.ResearchHours} business days back*</span> and saved <span className="bold">{props.data.ResearchHours} dollars** </span> by using Wonder for
+                In the past month, your company got <span class="bold"> {arr.ResearchHours/8} business days back*</span> and saved <span className="bold">{props.data.ResearchHours} dollars** </span> by using Wonder for
                 your research needs.
 
             </li>

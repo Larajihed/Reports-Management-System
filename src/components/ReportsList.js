@@ -58,7 +58,8 @@ export default function ReportsList(props) {
         if (arr[report].userId ==  localUserId) {
           return (
             <> 
-            <td >{index } </td>
+            <td >
+            <img src='https://www.svgrepo.com/show/103036/pdf.svg' style={{height:"10px"}}></img></td>
             <td >
                 {
 

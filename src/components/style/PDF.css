@@ -1,40 +1,5 @@
-.main{
+.main {
     padding: 32px;
-}
-/*.scaled{
-   transform: scale(0.8)
-}*/
-
-
-header {
-    border-bottom: 0.5px solid #DDE1E6;
-    display: flex;
-    display: -webkit-box;
-    /* wkhtmltopdf uses this one */
-    /*    -webkit-box-pack: center;  wkhtmltopdf uses this one */
-    /*        vertical-align: middle; */
-    padding-bottom: 4px;
-}
-
-.seperator {
-    height: 20px;
-    width: 1px;
-    background-color: #98A5B2;
-    margin-top: 4px;
-    margin-left: 10px;
-}
-
-.company-logo-container {
-    background-color: #fff;
-    /*  display: table-cell;
-    vertical-align: middle;
-    text-align: center; */
-
-}
-
-.company-logo-container img {
-    height: 24px;
-    margin-left: 10px;
 }
 
 .row2 div {
@@ -42,40 +7,13 @@ header {
     height: 68px;
 }
 
-
-
-.logo {
-    height: 24px;
-}
-
-.info-section {
-    display: -webkit-box;
-    /* wkhtmltopdf uses this one */
-    -webkit-box-pack: center;
-    /* wkhtmltopdf uses this one */
-    display: flex;
-    margin-top: 16px;
-   
-}
-.title-container{
-    font-size: 16px;
-}
-.notes-container{
-    font-size: 14px;
-    width: 80%;
-    margin-left: 8px;
-    
-}
 .bold {
     font-weight: bold;
 }
 
 .numbers-container {
-    display: -webkit-box;
-    /* wkhtmltopdf uses this one */
-    -webkit-box-pack: center;
-    /* wkhtmltopdf uses this one */
-    display: flex;
+
+
     line-height: 14.5px;
     background-color: #ECF7FD;
     padding: 8px 16px;
@@ -89,48 +27,25 @@ header {
     display: flex;
 }
 
-
-
 .date {
-    font-size: 14px;
+    font-size: 24px;
     text-transform: uppercase;
 
 }
 
-
 .title {
-    font-weight: 600;
-    font-size: 22px;
+    font-weight: bold;
+    font-size: 48px;
     line-height: 30px;
+
 }
 
 .general-container {
     background-color: #47525E;
     height: 30px;
     margin-top: 16px;
-text-align: center;
+    text-align: center;
 
-}
-
-.charts-container {
-    display: flex;
-    display: -webkit-box;
-
-}
-
-.chart {
-    width: 300px;
-    padding-top: 16px;
-}
-
-.chart img {
-    width: 300px;
-}
-
-.smalldiv {
-    width: 4px;
-    height: 30px;
-    background-color: #2F83DE;
 }
 
 .section-title {
@@ -141,12 +56,10 @@ text-align: center;
 
 }
 
-
-
 .metric-row {
     margin-top: 16px;
     display: flex;
-    
+
 }
 
 .metrics-element {
@@ -156,19 +69,21 @@ text-align: center;
     text-align: center;
     border-right: none;
 }
+
 .metrics-element:nth-child(1) {
-    
+
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 
 
 }
+
 .metrics-element:nth-child(4) {
     border: 1px solid #C7D1DC;
     height: 68px;
     text-align: center;
     border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px; 
+    border-bottom-right-radius: 4px;
 }
 
 .metric-title {
@@ -183,26 +98,14 @@ text-align: center;
     font-size: 24px;
     line-height: 30px;
     color: #000;
+    margin-top: -12px;
 }
 
-.kpi3 {
-    width: 311px;
-}
 
 table {
     border: 1px solid;
     border-radius: 2px;
     font-size: 11.5px;
-}
-
-.blue-background {
-    background-color: #2E7CD0;
-    color: #fff;
-    border: 1px solid #2E7CD0;
-}
-
-.canvas1 {
-    background-color: #2E7CD0;
 }
 
 table th {
@@ -227,7 +130,6 @@ th {
 th:nth-child(2) {
     width: 13%;
     text-align: center;
-
 }
 
 td:nth-child(2) {
@@ -237,18 +139,11 @@ td:nth-child(2) {
 
 td:nth-child(2) {
     width: 13%;
-    /* text-align: center;*/
 }
 
 td:nth-child(3) {
     width: 5%;
     text-align: center;
-}
-
-td img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 td:nth-child(4) {
@@ -298,17 +193,7 @@ td:nth-child(6) {
     margin-top: 16px;
 }
 
-.definitions-container p {
-    font-size: 12px;
-    line-height: 1.5;
-    margin-bottom: 16px;
-}
-
-p{
-    margin-bottom: 0.4rem;
-}
-
-li{
+li {
     line-height: 16px;
     margin-bottom: 8px;
 }
@@ -317,4 +202,6 @@ li{
     font-size: 14px;
 }
 
-
+.notes-container li{
+    line-height: 24px;
+}
