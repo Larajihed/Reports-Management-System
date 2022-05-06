@@ -57,7 +57,6 @@ export default function Calendar() {
         
         },
       );
-          window.location.reload(false);
 
     }
     else if (title === "") {
@@ -65,7 +64,7 @@ export default function Calendar() {
       return false;
     }
     else {
-      alert('Entry Cancelled By User');
+      console.log('Entry Cancelled By User');
       return false;
     }
   }

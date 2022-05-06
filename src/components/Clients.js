@@ -20,7 +20,7 @@ export default function Clients() {
           <AddNewClient />
         </div>
       </div>
-      <div className='right'>
+      <div className='right-container'>
       <ClientsList/>
 
 </div>

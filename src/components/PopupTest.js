@@ -5,28 +5,27 @@ import ReactToPdf from 'react-to-pdf'
 import { CsvToHtmlTable } from 'react-csv-to-table';
 import vector from '../assets/svg/Vector.png'
 export default function PopupTest(props) {
-  console.log("props " + props.projectsNumberRef)
   const ref = React.createRef();
-
+  let reportName = props.selectedValue + " " + props.date
   return (
 
     <div className='popup-container'>
       <div className='popup'>
-        <h1>{props.text}</h1>
+        <h1>Report: {reportName}</h1>
 
         <button onClick={props.closePopup} style={{border:"none",backgroundColor:"white",fontSize:"32px",position:"absolute",right:"10%",top:"5%",fontWeight:"bold"}} >X</button>
         <div className='main' style={{ width: 800, height: 1390 }} ref={ref}>
           <div className="info-container">
 
             <div className="infos">
-              <p className="title">{props.companyName }</p>
+              <p className="title">{props.selectedValue }</p>
               <p className="date">{ props.date}</p>
 
             </div>
 
           </div>
           <div className="general-container">
-            <p className="section-title"> overview</p>
+            <p className="section-title"> Overview</p>
           </div>
           <div className="numbers-container">
             <div className="title-container">
@@ -98,7 +97,7 @@ export default function PopupTest(props) {
           <div className='right-section'>
             <img style={{marginTop:"20px"}} src={vector}></img>
             <h4 style={{marginTop:"16px"}}>Report Generated on <br></br> {props.addDate}</h4>
-          <ReactToPdf targetRef={ref} filename="Report" x={.5} y={.5}>
+          <ReactToPdf targetRef={ref} filename= {reportName} x={.5} y={.5}>
             {({ toPdf }) => (
               <button style={{marginTop:"8px",border:"none",padding:"8px 16px",borderRadius:"6px",backgroundColor:"#3A9F5D",color:"white"}} variant='primary' onClick={toPdf}>Generate pdf  </button>
             )}

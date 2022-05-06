@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Form, Button, Card, } from "react-bootstrap"
 import { database } from "../firebase";
 // import { useNavigate } from "react-router-dom"
-import { ref, push, set } from "firebase/database";
+import { ref, push, set, onValue } from "firebase/database";
 import Header from "./Header";
 import Menu from "./Menu";
 import Popup from './NewReportPopup';
@@ -11,98 +11,94 @@ import auth from '../firebase'
 import { getAuth } from "firebase/auth";
 import PopupTest from "./PopupTest";
 
-
-
 export default function ReportForm() {
-
   const projectsNumberRef = useRef()
   const ResearchHoursRef = useRef()
   const usersNumberRef = useRef()
   const peakHoursRef = useRef()
-  const companyNameRef = useRef()
   const dateRef = useRef()
   const dataRef = useRef()
-
-
-
-  const [show,setShow]=useState(false);
-
-
-
+  const [clients, setClients] = useState([])
+  const ClientsRef = ref(database, '/clients');
+  const [selectedValue, setSelectedValue] = useState("")
+  useEffect(() => {
+    async function fetchData() {
+      await onValue(ClientsRef, (snapshot) => {
+        const data = snapshot.val();
+        const clientsArray = Object.entries(data)
+        setClients(clientsArray)
+      })
+    }
+    fetchData();
+  }, [])
+  const [show, setShow] = useState(false);
   const postListRef = ref(database, 'reports');
   const newPostRef = push(postListRef);
   const [arr, setdata] = useState('')
-
-
-
   const auth = getAuth();
   const user = auth.currentUser;
-
- 
-
-
   async function handleSubmit(e) {
     e.preventDefault()
-var today = new Date();
-var addDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
+    var today = new Date();
+    var addDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     const projectsNumber = projectsNumberRef.current.value
     const ResearchHours = ResearchHoursRef.current.value
     const usersNumber = usersNumberRef.current.value
     const peakHours = peakHoursRef.current.value
-    const companyName = companyNameRef.current.value
     const date = dateRef.current.value
     const csvData = dataRef.current.value
-    const variabless = [projectsNumber, ResearchHours, usersNumber, peakHours, companyName, date, csvData]
-    console.log("variables" + variabless)
+    const variabless = [projectsNumber, ResearchHours, usersNumber, peakHours, date, csvData]
     const userId = user.uid
     await set(newPostRef,
-
       {
-
-
         userId,
         projectsNumber,
         ResearchHours,
         usersNumber,
+        selectedValue,
         peakHours,
-        companyName,
         date,
         csvData,
         addDate
-
       },
     );
-
-
-    
-    console.log("Data sent ! :rocket ");
-
+    setShowPopup(!showPopup)
     setdata(variabless)
   }
-  const [showPopup,setShowPopup]= useState(false)
+
+  const [showPopup, setShowPopup] = useState(false)
+
   function togglePopup() {
-    handleSubmit()
-setShowPopup(!showPopup)
+    setShowPopup(false)
 
   }
-
   var today = new Date();
-
-
+  function handleChange(e) {
+    setSelectedValue(e.target.value);
+  }
   return (
     <>
       <Header></Header>
       <Menu></Menu>
       <h5 style={{ position: "absolute", left: "19%", top: "16%", zIndex: "1", backgroundColor: "#ededed", padding: "8px 16px", borderRadius: "5px", position: "fixed" }}>Dashboard - Create New Report</h5>
-
       <Card style={{ width: "400px", left: "45%", position: "absolute", top: "30%" }}>
         <Card.Body >
           <h2 className='text-center mb-4'>Report Details</h2>
-          <Form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <Form.Group id="companyName">
-              <Form.Label>Company Name*</Form.Label>
-              <Form.Control type="text" ref={companyNameRef} required style={{ width: "370px" }} />
+              <label for="receiver">Client Email</label><br />
+              <select value={selectedValue} name="receiver" onChange={handleChange} required>
+                <option value="" >Client Email</option>
+                {clients.map((anObjectMapped, index) => {
+                  return (
+                    <>
+                      <option value={anObjectMapped[1].clientName}>
+                        {anObjectMapped[1].clientName}
+                      </option>
+                    </>
+                  );
+                })}
+              </select><br />
             </Form.Group>
             <Form.Group id="date">
               <Form.Label>Report Date * </Form.Label>
@@ -124,41 +120,31 @@ setShowPopup(!showPopup)
               <Form.Label>Peak man hours*</Form.Label>
               <Form.Control type="number" ref={peakHoursRef} required style={{ width: "370px" }} />
             </Form.Group>
-
             <Form.Group id="dataSource" style={{ display: "flex" }} >
               <Form.Label>Data Source</Form.Label>
-
               <textarea ref={dataRef} required style={{ marginTop: "32px", width: "370px", marginLeft: "-84px" }} ></textarea>
             </Form.Group>
-            <button onClick={togglePopup}>
-
-             Send
-
-            </button>
-          </Form>
+            <button onClick={togglePopup}>Send</button>
+          </form>
         </Card.Body>
-     
-     
       </Card>
-     <div >
-     {showPopup ? 
-          <PopupTest 
-            projectsNumber = {projectsNumberRef.current.value}
-            ResearchHours = {ResearchHoursRef.current.value}
-            usersNumber = {usersNumberRef.current.value}
-            peakHours = {peakHoursRef.current.value}
-            companyName = {companyNameRef.current.value}
-            date ={ dateRef.current.value}
-            csvData = {dataRef.current.value}
-            addDate ={
-
-              today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()}
+      <div >
+        {showPopup ?
+          <PopupTest
+            projectsNumber={projectsNumberRef.current.value}
+            ResearchHours={ResearchHoursRef.current.value}
+            usersNumber={usersNumberRef.current.value}
+            peakHours={peakHoursRef.current.value}
+            date={dateRef.current.value}
+            csvData={dataRef.current.value}
+            selectedValue={selectedValue}
+            addDate={today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()}
             text='Close Me'
             closePopup={togglePopup}
           />
           : null
         }
-     </div>
+      </div>
     </>
   )
 }

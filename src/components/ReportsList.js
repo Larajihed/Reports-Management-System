@@ -63,7 +63,7 @@ export default function ReportsList(props) {
             <td >
                 {
 
-              arr[report].companyName
+              arr[report].selectedValue
               }</td>
                <td >{arr[report].date}</td>
                <td> 

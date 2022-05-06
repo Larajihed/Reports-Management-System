@@ -2,10 +2,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import { onValue, ref, remove, push, set, update } from 'firebase/database';
 import { database, auth } from "../firebase";
 import './style/Clients.css'
+import { Alert } from 'react-bootstrap';
 export default function ClientsList() {
     const user = auth.currentUser;
     const localUserId = user.uid
     const [clients, setClients] = useState([])
+    const [error, setError] = useState("")
+
     const [clientId, setClientId] = useState()
     // get reference for the reports in the database
     const ClientsRef = ref(database, '/clients');
@@ -19,11 +22,11 @@ export default function ClientsList() {
 
     async function addClient(e) {
 
+       
         const clientName = clientNameRef.current.value
         const clientEmail = clientEmailRef.current.value
         e.preventDefault()
-
-        await set(newPostRef,
+        clientEmailsArray.includes(clientEmail) ? setError("Client Exist") : await set(newPostRef,
 
             {
                 clientName,
@@ -32,7 +35,8 @@ export default function ClientsList() {
 
 
         );
-          window.location.reload(false);
+        
+        //  window.location.reload(false);
     }
 
 
@@ -43,7 +47,14 @@ export default function ClientsList() {
             setClients(clientsArray)
         })
     }, [])
-
+    let clientEmailsArray = []
+    function checkClients(){
+        clients.map((anObjectMapped,index) =>{
+            let element = anObjectMapped[1].clientEmail
+            clientEmailsArray.push(element)
+        })
+    }
+    checkClients()
 
     function removeFromFirebase(i) {
         console.log(i)
@@ -84,6 +95,8 @@ export default function ClientsList() {
                     <label>Client Email</label> <br />
                     <input className='text' ref={clientEmailRef} type="email" required></input> <br />
                     <input className='addclientbtn' type="Submit" value="Add Client"></input>
+                    {error && <Alert variant="danger" style={{width:"345px",position:"absolute",top:"150%"}}>{error}</Alert>}
+
                 </form>
             </div>
 

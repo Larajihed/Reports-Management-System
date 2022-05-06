@@ -1,16 +1,17 @@
-import React, { useState,useEffect} from 'react'
+import React, { useState,useEffect,useRef} from 'react'
 import Header from './Header'
 import { database } from '../firebase'
 import Menu from './Menu'
 import emailjs from 'emailjs-com'
-import { useAuth } from "../contexts/AuthContext"
 import './style/SendEmail.css'
 import { Alert } from 'react-bootstrap'
-import { onValue,ref } from 'firebase/database'
+import { onValue,ref,push,set } from 'firebase/database'
 export default function SendEmail() {
     const [error, setError] = useState("")
     const [clients, setClients] = useState([])
     const ClientsRef = ref(database, '/clients');
+    const emailRef = useRef()
+    const subjectRef = useRef()
     const [selectedValue,setSelectedValue]=useState("")
     useEffect( () => {
         async function fetchData(){
@@ -23,12 +24,20 @@ export default function SendEmail() {
           fetchData();
     }, [])
 
-
+    const emailsRef = ref(database, '/emails');
+    const postListRef = ref(database, 'emails');
+    const newPostRef = push(postListRef);
 
   
 
-    function sendEmail(event){
+    async function sendEmail(event){
         event.preventDefault()
+        await set(newPostRef,
+
+            {
+                 
+            },
+        )
         emailjs.sendForm("service_pchrrda","template_b3kb6gi",'#formulaire','pussdbd5XcIzZwUkL')
         .then(function(response) {
             console.log('SUCCESS!', response.status, response.text);
@@ -77,7 +86,7 @@ export default function SendEmail() {
             
             <br/>
             <label for="subject">Subject</label><br/>
-            <input className='text' name="subject" type="string" required/>
+            <input className='text' name="subject" type="string" required />
             <br/>
             <input className='filebtn' type="file" name="my_file" required/><br></br>
             <input className='sendbtn' type="submit" value="Send"/>

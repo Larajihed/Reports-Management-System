@@ -32,13 +32,13 @@ export default function Popup(props) {
       ))}
       <Modal show={show} fullscreen={fullscreen}  onHide={() => setShow(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Pdf Report</Modal.Title>
+          <Modal.Title >Pdf Report</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className='scaled'>
           <div className='right-section'>
             <img style={{marginTop:"20px"}} src={vector}></img>
-            <h4 style={{marginTop:"16px"}}>Report Generated on <br></br> {props.addDate}</h4>
+            <h4 style={{marginTop:"16px"}}>Report Generated on <br></br> {arr.addDate}</h4>
           <ReactToPdf targetRef={ref} filename="Report" x={.5} y={.5}>
             {({ toPdf }) => (
               <button style={{marginTop:"8px",border:"none",padding:"8px 16px",borderRadius:"6px",backgroundColor:"#3A9F5D",color:"white"}} variant='primary' onClick={toPdf}>Generate pdf  </button>
@@ -49,7 +49,7 @@ export default function Popup(props) {
         <div className="info-container">
 
             <div className="infos">
-                <p className="title">{arr.companyName}</p>
+                <p className="title">{arr.selectedValue}</p>
          <p className="date">{arr.date}</p> 
 
             </div>
@@ -66,12 +66,12 @@ export default function Popup(props) {
         </div>
         <div className="notes-container">
             <li>
-                In the past month, your company got <span class="bold"> {arr.ResearchHours/8} business days back*</span> and saved <span className="bold">{props.data.ResearchHours} dollars** </span> by using Wonder for
+                In the past month, your company got <span class="bold"> {arr.ResearchHours/8} business days back*</span> and saved <span className="bold">{arr.ResearchHours*125} dollars** </span> by using Wonder for
                 your research needs.
 
             </li>
             <li>
-                Your company's peak* throughput in a 24 hour period was <span className="bold">  {arr.ResearchHours}  hours ***</span> of research.
+                Your company's peak* throughput in a 24 hour period was <span className="bold">  {arr.peakHours}  hours ***</span> of research.
             </li>
 
         </div>
@@ -89,14 +89,14 @@ export default function Popup(props) {
             <div className="metrics-element ">
                 <div className="metric-title">
                     <p>NUMBER OF PROJECTS</p>
-                    <p className='metric-value'>{arr.ResearchHours}</p>
+                    <p className='metric-value'>{arr.projectsNumber}</p>
                 </div>
             
             </div>
             <div className="metrics-element ">
                 <div className="metric-title">
                     <p>NUMBER OF USERS</p>
-                    <p className='metric-value'>{arr.ResearchHours}</p>
+                    <p className='metric-value'>{arr.usersNumber}</p>
 
                 </div>
                
@@ -104,7 +104,7 @@ export default function Popup(props) {
             <div className="metrics-element">
                 <div className="metric-title">
                     <p>TOTAL SPENT</p>
-                    <p className='metric-value'>{arr.ResearchHours}</p>
+                    <p className='metric-value'>{arr.ResearchHours*125}</p>
                 </div>
              
             </div>
@@ -121,13 +121,13 @@ export default function Popup(props) {
             *** Peak Man Hours = The most hours researched in a given day 
         </p>
         <CsvToHtmlTable
-  data={arr.ResearchHours}
+  data={arr.csvData}
   csvDelimiter=","
 />
 
     </div>
     </div>
-    {arr.ResearchHours} </div>
+    </div>
 </div>
         </Modal.Body>
       </Modal>
