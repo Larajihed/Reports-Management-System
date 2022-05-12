@@ -40,7 +40,7 @@ export default function ReportsList(props) {
 
   return (
     <>
-      <table className='position  ' width="500" style={{marginTop:"32px", fontSize: "16px", border: "none", borderRadius: "60px" }}>
+      <table className='position  ' width="600" style={{marginTop:"32px", fontSize: "16px", border: "none", borderRadius: "60px" }}>
 
         <thead  >
           <th className='font-24'  width="1%">#</th>

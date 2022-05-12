@@ -25,6 +25,7 @@ function App() {
             <AuthProvider>
               <Routes>
                 <Route
+                exact
                   path="/"
                   element={
                     <PrivateRoute>
