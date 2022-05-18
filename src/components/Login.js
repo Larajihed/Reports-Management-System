@@ -10,6 +10,7 @@ export default function Login() {
   const { login } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [passwordShown, setPasswordShown] = useState(false);
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -23,19 +24,23 @@ export default function Login() {
       await login(emailRef.current.value, passwordRef.current.value)
       navigate('/');
     } catch {
-      setError("Failed to login")
+      setError("Wrong Login Information")
     }
 
     setLoading(false)
   }
-
+  const togglePassword = () => {
+    // When the handler is invoked
+    // inverse the boolean state of passwordShown
+    setPasswordShown(!passwordShown);
+  };
   return (
     <div className="main-container">
 
 <div className="left">
 <h1 >Create Reports in Seconds ! </h1>
 <h2>Login to access your account </h2>
-<div className="card " style={{width:" 400px", marginLeft:"150px", marginTop: "50px", marginRight:"150px"}}>
+<div className="card " style={{width:" 400px", marginLeft:"150px", marginTop: "30px", marginRight:"150px"}}>
 
         <div className="card-body" >
           <h2 className="text-center mb-4">Login</h2>
@@ -47,7 +52,8 @@ export default function Login() {
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required style={{width:"370px"}} />
+              <Form.Control type={passwordShown ? "text" : "password"} ref={passwordRef} required style={{width:"370px"}} />
+              <a onClick={togglePassword} style={{float:"right",fontSize:"12px",cursor:"pointer",marginTop:"8px"}}>{passwordShown ? "hide password" : "show password"}</a>
             </Form.Group>
             
             <Button disabled={loading} className=" mt-4" type="submit" style={{width:"370px"}} >

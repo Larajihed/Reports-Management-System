@@ -3,6 +3,7 @@ import { onValue, ref, remove, push, set, update } from 'firebase/database';
 import { database, auth } from "../firebase";
 import './style/Clients.css'
 import { Alert } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button'
 export default function ClientsList() {
     const user = auth.currentUser;
     const localUserId = user.uid
@@ -32,11 +33,11 @@ export default function ClientsList() {
                 clientName,
                 clientEmail
             },
-
-
+            clientNameRef.current.value=" ",
+            clientEmailRef.current.value=" "
         );
         
-        //  window.location.reload(false);
+//        window.location.reload(false);
     }
 
 
@@ -46,10 +47,10 @@ export default function ClientsList() {
             const clientsArray = Object.entries(data)
             setClients(clientsArray)
         })
-    }, [])
+    }, [clients])
     let clientEmailsArray = []
     function checkClients(){
-        clients.map((anObjectMapped,index) =>{
+        clients.map((anObjectMapped) =>{
             let element = anObjectMapped[1].clientEmail
             clientEmailsArray.push(element)
         })
@@ -57,9 +58,9 @@ export default function ClientsList() {
     checkClients()
 
     function removeFromFirebase(i) {
-        console.log(i)
         remove(ref(database, "clients/" + i[0]))
             .then(() => { }).catch((error) => { })
+            window.location.reload(false);
     }
 
     function handleEditClient(i) {
@@ -100,8 +101,8 @@ export default function ClientsList() {
                 </form>
             </div>
 
-            <div style={{ position: "absolute", top: "20%", left: "40%" }}>
-                <table>
+            <div style={{ position: "absolute", top: "20%", left: "42.5%"}}>
+                <table style={{width:"600px",textAlign:"center"}}>
                     <thead>
                         <th>
                             #
@@ -131,16 +132,16 @@ export default function ClientsList() {
                                         {anObjectMapped[1].clientEmail}
                                     </td>
                                     <td>
-
-                                        <button onClick={handleDelete = () => {
-                                            removeFromFirebase(anObjectMapped)
-                                        }}>Delete Client</button>
-                                        <button onClick={handleEdit = () => {
+                                    <Button className='mx-2' variant='primary' onClick={handleEdit = () => {
                                             editClientEmailRef.current.value = anObjectMapped[1].clientEmail
                                             editClientNameRef.current.value = anObjectMapped[1].clientName
                                             const clientId = anObjectMapped[0]
                                             setClientId(clientId)
-                                        }}>Edit Client</button>
+                                        }}>Edit Client</Button>
+                                        <Button variant='outline-danger ' className='mx-2' onClick={handleDelete = () => {
+                                            removeFromFirebase(anObjectMapped)
+                                        }}>Delete Client</Button>
+                                     
                                     </td>
                                 </tr>
 
@@ -158,7 +159,7 @@ export default function ClientsList() {
                 <input type="text" className='text' ref={editClientNameRef} required></input> 
 
                 <input type="email" className='text' ref={editClientEmailRef} required></input> 
-                <input type="submit" className='editclientbtn' onClick={handleSubmitEditClient}></input>
+                <input type="submit" className='editclientbtn' onClick={handleSubmitEditClient} value="Edit"></input>
 
             </div>
         </>

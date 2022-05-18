@@ -12,6 +12,7 @@ import { getAuth } from "firebase/auth";
 import PopupTest from "./PopupTest";
 
 export default function ReportForm() {
+
   const projectsNumberRef = useRef()
   const ResearchHoursRef = useRef()
   const usersNumberRef = useRef()
@@ -46,8 +47,7 @@ export default function ReportForm() {
     const usersNumber = usersNumberRef.current.value
     const peakHours = peakHoursRef.current.value
     const date = dateRef.current.value
-    const csvData = dataRef.current.value
-    const variabless = [projectsNumber, ResearchHours, usersNumber, peakHours, date, csvData]
+    const variabless = [projectsNumber, ResearchHours, usersNumber, peakHours, date]
     const userId = user.uid
     await set(newPostRef,
       {
@@ -58,7 +58,6 @@ export default function ReportForm() {
         selectedValue,
         peakHours,
         date,
-        csvData,
         addDate
       },
     );
@@ -69,8 +68,7 @@ export default function ReportForm() {
   const [showPopup, setShowPopup] = useState(false)
 
   function togglePopup() {
-    setShowPopup(false)
-
+    //setShowPopup(false)
   }
   var today = new Date();
   function handleChange(e) {
@@ -81,15 +79,15 @@ export default function ReportForm() {
       <Header></Header>
       <Menu></Menu>
       <h5 style={{ position: "absolute", left: "19%", top: "16%", zIndex: "1", backgroundColor: "#ededed", padding: "8px 16px", borderRadius: "5px", position: "fixed" }}>Dashboard - Create New Report</h5>
-      <Card style={{ width: "400px", left: "45%", position: "absolute", top: "30%" }}>
+      <Card style={{ width: "400px", left: "45%", position: "absolute", top: "20%" }}>
         <Card.Body >
           <h2 className='text-center mb-4'>Report Details</h2>
           <form onSubmit={handleSubmit}>
             <Form.Group id="companyName">
-              <label for="receiver">Client Email</label><br />
+              <label for="receiver">Client</label><br />
               <select value={selectedValue} name="receiver" onChange={handleChange} required>
-                <option value="" >Client Email</option>
-                {clients.map((anObjectMapped, index) => {
+                <option value="" >Choose Client</option>
+                {clients.map((anObjectMapped) => {
                   return (
                     <>
                       <option value={anObjectMapped[1].clientName}>
@@ -101,7 +99,7 @@ export default function ReportForm() {
               </select><br />
             </Form.Group>
             <Form.Group id="date">
-              <Form.Label>Report Date * </Form.Label>
+              <Form.Label>Report Date*</Form.Label>
               <Form.Control type="month" ref={dateRef} required style={{ width: "370px" }} />
             </Form.Group>
             <Form.Group id="projectsNumber">
@@ -120,10 +118,7 @@ export default function ReportForm() {
               <Form.Label>Peak man hours*</Form.Label>
               <Form.Control type="number" ref={peakHoursRef} required style={{ width: "370px" }} />
             </Form.Group>
-            <Form.Group id="dataSource" style={{ display: "flex" }} >
-              <Form.Label>Data Source</Form.Label>
-              <textarea ref={dataRef} required style={{ marginTop: "32px", width: "370px", marginLeft: "-84px" }} ></textarea>
-            </Form.Group>
+           
             <button onClick={togglePopup}>Send</button>
           </form>
         </Card.Body>
@@ -136,7 +131,6 @@ export default function ReportForm() {
             usersNumber={usersNumberRef.current.value}
             peakHours={peakHoursRef.current.value}
             date={dateRef.current.value}
-            csvData={dataRef.current.value}
             selectedValue={selectedValue}
             addDate={today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()}
             text='Close Me'

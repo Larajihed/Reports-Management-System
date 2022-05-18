@@ -4,11 +4,12 @@
     top: 25%;
     width: 76%;
 }
-
-th{
-    width: 5%;
+/*
+th:nth-child(1){
+    width: 10%;
     text-align:center
 }
+*/
 table{
     border: 1px rgb(209, 209, 209) solid;
     border-radius: 10px;

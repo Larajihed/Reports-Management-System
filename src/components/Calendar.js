@@ -5,13 +5,19 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { push, ref, set, onValue,remove } from 'firebase/database'
 import { database } from '../firebase'
 import './style/Calendar.css'
+import NewEventPopup from './NewEventPopup'
+import RemoveEventPopup from './RemoveEventPopup'
 export default function Calendar() {
+  const [showPopup, setShowPopup] = useState(false)
+  const [showEventPopup, setShowEvent] = useState(false)
 
+  const [event,setEvent]=useState()
   const [data, setdata] = useState('[]')
-  const [show, setShow] = useState(false)
+  function togglePopup() {
+    setShowPopup(false)
 
+  }
   let tab = []
-  let tab2 = []
 
 
   const DateRef = ref(database, 'date/')
@@ -20,17 +26,14 @@ export default function Calendar() {
       const dates = snapshot.val()
       /* Map into array */
       const  amine = Object.keys(dates)
+      console.log("amine" + amine)
      amine.map((i,index) => {
-       // console.log( amine[index] )
 
         tab.push(dates[i])
         dates[i].key = amine[index];
-        console.log(dates[i])
-      //  console.log(dates[i])
+
       })
-     
               setdata(tab)
-      
     })
     return () => { }
 
@@ -45,9 +48,22 @@ export default function Calendar() {
   */
 
   async function handleDateClick(e) {
-    const reportDate = e.dateStr
-    var title = prompt('Enter Company Title', "")
-    if (title != "") {
+    setEvent(e)
+    if (showEventPopup) {
+
+      //setShowEvent(false)
+
+      setShowPopup(true)
+
+    } else{
+
+      setShowPopup(true)
+
+    }
+    
+   // setShowEvent(false)
+    //var title = prompt('Enter Company Title', "")
+   /* if (title != "") {
       await set(newDateRef,
         {
           title: title,
@@ -67,6 +83,7 @@ export default function Calendar() {
       console.log('Entry Cancelled By User');
       return false;
     }
+    */
   }
 
 
@@ -77,9 +94,16 @@ export default function Calendar() {
   const handleEventClick = (eventClickInfo ) => {
     // setShow(true)
     const Key = eventClickInfo.event._def.extendedProps.key 
-    console.log(Key)
-    remove(ref(database, "date/" + Key))
-    window.location.reload(false);
+    setEvent(eventClickInfo)
+    if (showPopup) {
+      setShowPopup(false)
+      setShowEvent(true)
+    } else{
+      setShowEvent(true)
+    }
+
+    //remove(ref(database, "date/" + Key))
+    //window.location.reload(false);
   }
   return (
 
@@ -95,7 +119,27 @@ export default function Calendar() {
       
 
 
+<div className='main-popup-container'>
+        {showPopup ?
+          <NewEventPopup
+          
+          event={event}
+            text='Close Me'
+            closePopup={togglePopup}
+          />
+          : null
+        }
+         {showEventPopup ?
+          <RemoveEventPopup
+          event={event}
 
+            text='Close Me'
+            closePopup={togglePopup}
+          />
+          : null
+        }
+      </div>
+      
     </>
   )
 }

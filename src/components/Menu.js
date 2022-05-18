@@ -30,6 +30,7 @@ export default function Menu() {
 
   <Link className='menu-element' to="/reminders"  >Manage Reminders</Link>
   <Link className='menu-element' to="/send-email"  >Send Report</Link>
+  <Link className='menu-element' to="/emails-history"  >Emails History</Link>
   <Link className='menu-element' to="/clients"  >Manage Clients</Link>
   <Link className='menu-element' to="/update-profile"  >Account Settings</Link>
 

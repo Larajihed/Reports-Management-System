@@ -7,6 +7,8 @@ import './style/PDF.css'
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import { TiTickOutline } from "react-icons/ti";
 import vector from '../assets/svg/Vector.png'
+import DocumentPDF from './DocumentPDF';
+import DocumentPDFView from './DocumentPDFView';
 export default function Popup(props) {
   const ref = React.createRef();
 
@@ -26,7 +28,7 @@ export default function Popup(props) {
     <>
    
     {values.map((v, ) => (
-        <Button className="me-2 mb-2" onClick={() => handleShow(v)}>
+        <Button className="me-2 " onClick={() => handleShow(v)}>
           View
         </Button>
       ))}
@@ -39,11 +41,7 @@ export default function Popup(props) {
           <div className='right-section'>
             <img style={{marginTop:"20px"}} src={vector}></img>
             <h4 style={{marginTop:"16px"}}>Report Generated on <br></br> {arr.addDate}</h4>
-          <ReactToPdf targetRef={ref} filename="Report" x={.5} y={.5}>
-            {({ toPdf }) => (
-              <button style={{marginTop:"8px",border:"none",padding:"8px 16px",borderRadius:"6px",backgroundColor:"#3A9F5D",color:"white"}} variant='primary' onClick={toPdf}>Generate pdf  </button>
-            )}
-          </ReactToPdf>
+          <DocumentPDFView props={arr} style={{marginTop:"25px"}}/>
       </div>
     <div  className='main' style={{width: 800, height: 1390  }} ref={ref}>
         <div className="info-container">
@@ -120,10 +118,7 @@ export default function Popup(props) {
 
             *** Peak Man Hours = The most hours researched in a given day 
         </p>
-        <CsvToHtmlTable
-  data={arr.csvData}
-  csvDelimiter=","
-/>
+       
 
     </div>
     </div>

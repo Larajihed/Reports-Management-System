@@ -14,3 +14,18 @@
     margin-top: -30px;
 
 }
+
+.main-popup-container{
+    position: absolute;
+    right: -43%;
+    top: 12%;
+    width: 270px;
+    height: 180px;
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 6px;
+    text-align: center;
+    padding: 8px;
+
+}

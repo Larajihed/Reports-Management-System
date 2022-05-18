@@ -40,13 +40,13 @@ export default function ReportsList(props) {
 
   return (
     <>
-      <table className='position  ' width="600" style={{marginTop:"32px", fontSize: "16px", border: "none", borderRadius: "60px" }}>
+      <table className='position  ' width="600" style={{textAlign:"center" ,marginTop:"32px", fontSize: "16px", border: "none", borderRadius: "60px" }}>
 
         <thead  >
           <th className='font-24'  width="1%">#</th>
-          <th className='font-24' width="40%">Company</th>
+          <th className='font-24' width="20%" >Company</th>
           <th className='font-24' width="30%" >Date</th>
-          <th className='font-24' width="20%">Report</th>
+          <th className='font-24' width="20%">Actions</th>
         </thead>
         <tbody>
       
@@ -59,7 +59,7 @@ export default function ReportsList(props) {
           return (
             <> 
             <td >
-            <img src='https://www.svgrepo.com/show/103036/pdf.svg' style={{height:"10px"}}></img></td>
+            <img src='https://www.svgrepo.com/show/103036/pdf.svg' style={{height:"24px"}}></img></td>
             <td >
                 {
 
@@ -77,6 +77,7 @@ export default function ReportsList(props) {
               onClick={handleDelete = () => {
                 remove(ref(database, "reports/" + report))
                   .then(() => {}).catch((error) => {})
+                  window.location.reload(false);
               }}> Delete</Button>
               </td>
 

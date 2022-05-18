@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import { Form, Button,  Alert } from "react-bootstrap"
 import { Link, useNavigate  } from "react-router-dom"
 import './style/Signup.css'
 import { useAuth } from "../contexts/AuthContext"
@@ -67,7 +67,7 @@ export default function Signup() {
       </div>
     </div>
       <div className="right">
-        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"></img>
+        <img alt="desciption" src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"></img>
       </div>
      </div>
     
