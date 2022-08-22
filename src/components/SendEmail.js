@@ -9,8 +9,11 @@ import {  ref as sRef, getDownloadURL, uploadBytesResumable } from "firebase/sto
 import './style/SendEmail.css'
 import { Alert } from 'react-bootstrap'
 import { onValue,ref,push,set } from 'firebase/database'
+import { upload } from '@testing-library/user-event/dist/upload'
+import { BoxLoading } from 'react-loadingg';
 
 export default function SendEmail() {
+    const [loading,setLoading]=useState(false);
     const [error, setError] = useState("")
     const [clients, setClients] = useState([])
     const ClientsRef = ref(database, '/clients');
@@ -33,47 +36,49 @@ export default function SendEmail() {
     const postListRef = ref(database, 'emails');
     const newPostRef = push(postListRef);
 
-    async function uploadFiles  (file) {
+    async function uploadFiles  (file,email,subject) {
         //
         console.log("upload Started")
         if (!file) return;
 
         const sotrageRef = sRef(storage, `files/${file.name}`);
         const uploadTask = uploadBytesResumable(sotrageRef, file);
-        const subjectValue= subjectRef.current.value
-      
-        await set(newPostRef,
-
-          {
-
-            receiver:selectedValue,
-            subject: subjectValue,
-            link:URL
-          
+        
+         uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+        console.log(snapshot)
           },
-          uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-          console.log(snapshot)
-            },
-            (error) => console.log("Error" , error),
-            () => {
-              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                console.log("File available at", downloadURL);
-                setURL(downloadURL)
-              });
-            }
-          )
-      )
+          (error) => console.log("Error" , error),
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              console.log("File available at", downloadURL);
+              setURL(downloadURL)
+               set(newPostRef,
+
+                {
+      
+                  receiver:email,
+                  subject:subject,
+                 link:downloadURL
+                },
+                
+            )
+            });
+          }
+        )
+        
      
       };
 
     async function sendEmail(event){
         event.preventDefault()
-
+      setLoading(true)
         const file = event.target[2].files[0]
-
-        uploadFiles(file);
+        const email = event.target[0].value
+       
+        const subject = event.target[1].value
+        uploadFiles(file,email,subject);
 
        
         emailjs.sendForm("service_pchrrda","template_b3kb6gi",'#formulaire','pussdbd5XcIzZwUkL')
@@ -81,6 +86,8 @@ export default function SendEmail() {
             console.log('SUCCESS!', response.status, response.text);
            // alert("Email Sent");
             setError("Email Sent !")
+            setLoading(false)
+
             
          }, function(error) {
             console.log('FAILED...', error)
@@ -99,11 +106,11 @@ export default function SendEmail() {
     <div>
         <Header/>
         <Menu/>
-        <h5 style={{position:"absolute",left:"19%",top:"16%",zIndex:"1",backgroundColor:"#ededed",padding:"8px 16px",borderRadius:"5px"}}>Send Report</h5>
+        <h5 style={{position:"absolute",left:"19%",top:"16%",zIndex:"1",backgroundColor:"#ededed",padding:"8px 16px",borderRadius:"5px"}}>Send Report
+        
+</h5>
 
         <div className='main' style={{position:"absolute",top:"20%",left:"19%",border:"1px solid rgb(209, 209, 209)",marginTop:"20px", borderRadius:"8px"}}>
-
-
 
             <form id='formulaire' enctype="multipart/form-data"  method="post" onSubmit={sendEmail}>
                 <label for="receiver">Client Email</label><br/>
@@ -118,7 +125,7 @@ export default function SendEmail() {
                                 </option>
                             </>
                         );
-                        
+
                     })}
                  
                    
@@ -131,11 +138,14 @@ export default function SendEmail() {
             <input className='filebtn' type="file" name="my_file" required/><br></br>
             <input className='sendbtn' type="submit" value="Send"/>
             </form>
+<div>
+  { loading && <BoxLoading/> }
+
+</div>
             {error && <Alert variant="success" style={{width:"350px",marginTop:"100px"}}>{error}<br></br>
             <Link to="/reminders">Delete from calendar</Link>
 
             </Alert>}
-
 
                     
         </div>

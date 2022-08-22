@@ -23,7 +23,6 @@ export default function ClientsList() {
 
     async function addClient(e) {
 
-       
         const clientName = clientNameRef.current.value
         const clientEmail = clientEmailRef.current.value
         e.preventDefault()

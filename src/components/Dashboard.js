@@ -60,9 +60,7 @@ const [reports,setReports] =useState('[]')
           </div>
 
         <div className="maincontainer" >
-    
-
-      <div >
+     <div >
       <strong>Current User : </strong> {currentUser.email}
         <Link  to="/report-form" className="btn btn-primary " style={{marginLeft:"175px"}} >
             Create New Report
