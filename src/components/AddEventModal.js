@@ -1,11 +1,12 @@
-import React from 'react'
-import { Modal,Button } from 'bootstrap'
-import { useState } from 'react';
-export default function AddEventModal() {
-    const [show, setShow] = useState(false);
+import React from "react";
+import { Modal, Button } from "bootstrap";
+import { useState } from "react";
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+export default function AddEventModal() {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -27,5 +28,5 @@ export default function AddEventModal() {
         </Modal.Footer>
       </Modal>
     </>
-  )
+  );
 }

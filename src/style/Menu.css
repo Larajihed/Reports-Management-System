@@ -1,5 +1,5 @@
-.menu-element{
-    color:black;
+.menu-element {
+    color: black;
     text-decoration: none;
     margin-left: 32px;
     margin-top: 10px;
@@ -7,8 +7,8 @@
     width: 200px;
 }
 
-.menu-element:hover{
-    color:black;
+.menu-element:hover {
+    color: black;
     text-decoration: none;
     width: 200px;
     font-weight: bold;
@@ -18,15 +18,15 @@
 
 
 
-.logout-btn{
-    background-color:red;
+.logout-btn {
+    background-color: red;
     color: white;
-    border:none ;
-    padding:8px 16px;
+    border: none;
+    padding: 8px 16px;
 
 
     border-radius: 6px;
-    margin:32px 16px;
+    margin: 32px 16px;
     width: 200px;
-    margin-top: 320px;
+
 }
