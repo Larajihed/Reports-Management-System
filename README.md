@@ -1,3 +1,7 @@
+# This project is an automated tool used to create monthly PDF reports for clients from a data input (Form in this case)
+ReactJs + Firebase + PDFKit ...
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
