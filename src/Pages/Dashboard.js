@@ -40,7 +40,20 @@ export default function Dashboard() {
     <>
       <Header />
       <Menu></Menu>
-
+      <h5
+        style={{
+          position: "absolute",
+          left: "19%",
+          top: "16%",
+          zIndex: "1",
+          backgroundColor: "#ededed",
+          padding: "8px 16px",
+          borderRadius: "5px",
+          position: "fixed",
+        }}
+      >
+        Dashboard
+      </h5>
       <div className="welcomeimgcontainer">
         <img className="welcomeimg" src={welcome}></img>
       </div>

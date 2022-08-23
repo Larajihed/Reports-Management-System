@@ -101,7 +101,6 @@ export default function UpdateProfile() {
           </Form>
         </Card.Body>
       </div>
-      <div className="w-100 text-center mt-2"></div>
 
       {showA && (
         <Toast
